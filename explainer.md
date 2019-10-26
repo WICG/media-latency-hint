@@ -24,11 +24,11 @@ In the other direction, some sites may prefer latency to be higher than the UA d
 
 We propose latencyHint as a `double`, with units being (partial) seconds.
 
-`
+```JavaScript
 partial interface HTMLMediaElement {
     attribute double latencyHint;
 };
-`
+```
 
 An earlier proposal considered coarse enum categories (e.g. "default" and "minimum"). This is less powerful for site authors and more difficult for implementers to get right. Any reduction in decoded frame buffering will increase risk of decoder underflow. A category like "minimum" forces implementers to choose how close to zero is still usable with only a coarse notion of the site behavior.  Instead, letting sites choose a the target value avoids this issue lets sites make site-specific decisions.
 
@@ -44,11 +44,11 @@ The proposal is to use a double with units in seconds. The granularity of second
 Sites are encouraged to set the hint as early as possible, even before setting the `src` attribute. This offers UAs the biggest opportunity to minimize buffering as they setup the media pipeline. For example, UAs may configure the OS audio rendering buffer to optimize for the target latency in the initial stages of pipeline setup without the possibility of re-initializing later on.
 
 ### Example
-`
+```JavaScript
 // Create the element, set the hint to indicate 75 msec of decoded buffer latency.
 let videoElement = document.createElement('video');
 videoElement.latencyHint = 0.075;
 
 // Now setup playback (MSE, file, stream, ...) just as you do today.
 videoElement.src = ...
-`
+```
