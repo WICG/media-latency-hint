@@ -1,7 +1,7 @@
 
 # Media latencyHint explained
 
-This explainer describes a new `latencyHint` attribute to be added to [HTMLMediaElement](https://html.spec.whatwg.org/multipage/media.html#htmlmediaelement) . The document explains the goals and non-goals of the API and in general helps understand the thought process behind the design. The API shape in the document is mostly for information and might not be final.
+This explainer describes a new `latencyHint` attribute to be added to [HTMLMediaElement](https://html.spec.whatwg.org/multipage/media.html#htmlmediaelement). The document explains the goals and non-goals of the API and in general helps understand the thought process behind the design. The API shape in the document is mostly for information and might not be final.
 
 ## Objective
 To give web authors influence over how much decoded output must be buffered for a user agent to begin playback or resume following a seek.
@@ -24,9 +24,11 @@ In the other direction, some sites may prefer latency to be higher than the UA d
 
 We propose latencyHint as a `double`, with units being (partial) seconds.
 
-  partial interface HTMLMediaElement {
-      attribute double latencyHint;
-  };
+`
+partial interface HTMLMediaElement {
+    attribute double latencyHint;
+};
+`
 
 An earlier proposal considered coarse enum categories (e.g. "default" and "minimum"). This is less powerful for site authors and more difficult for implementers to get right. Any reduction in decoded frame buffering will increase risk of decoder underflow. A category like "minimum" forces implementers to choose how close to zero is still usable with only a coarse notion of the site behavior.  Instead, letting sites choose a the target value avoids this issue lets sites make site-specific decisions.
 
@@ -42,10 +44,11 @@ The proposal is to use a double with units in seconds. The granularity of second
 Sites are encouraged to set the hint as early as possible, even before setting the `src` attribute. This offers UAs the biggest opportunity to minimize buffering as they setup the media pipeline. For example, UAs may configure the OS audio rendering buffer to optimize for the target latency in the initial stages of pipeline setup without the possibility of re-initializing later on.
 
 ### Example
-  // Create the element, set the hint to indicate 75 msec of decoded buffer latency.
-  let videoElement = document.createElement('video');
-  videoElement.latencyHint = 0.075;
+`
+// Create the element, set the hint to indicate 75 msec of decoded buffer latency.
+let videoElement = document.createElement('video');
+videoElement.latencyHint = 0.075;
 
-  // Now setup playback (MSE, file, stream, ...) just as you do today.
-  videoElement.src = ...
-
+// Now setup playback (MSE, file, stream, ...) just as you do today.
+videoElement.src = ...
+`
