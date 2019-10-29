@@ -16,7 +16,7 @@ Chromium currently offers an unspecified and undocumented "low delay" mode, whic
 
 ## Use cases
 
-The most obvious use case for lower latency. For certain applications, prioritizing smoothness over latency makes the wrong trade off. Examples include interactive video applications like cloud gaming. When a user moves their mouse to control the camera or presses a button to jump over an obstacle, even sub-second latency can make the game unplayable. A similar use case would be remote desktop streaming.
+The most obvious use cases would request lower latency. For certain applications, prioritizing smoothness over latency makes the wrong trade off. Examples include interactive video applications like cloud gaming. When a user moves their mouse to control the camera or presses a button to jump over an obstacle, even sub-second latency can make the game unplayable. A similar use case would be remote desktop streaming.
 
 In the other direction, some sites may prefer latency to be higher than the UA default. For example, the non-real-time video use-cases mentioned earlier (movies, tv, vlogging, ...) may choose values like 300 or 500 msec to reduce the chance of decoder stalls.
 
